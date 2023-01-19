@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 import IconIMG from "./assets/Icon.jpg";
-import FacebookImg from "./assets/Facebook.png";
-import GoogleImg from "./assets/google.png";
 import { colorPrimary } from "../../global/styles/colors";
 import { Img } from "./components/img";
 import { Title } from "./components/title";
@@ -11,12 +9,9 @@ import { Or } from "./components/or";
 import { Btn } from "./components/btn";
 import { TextSignUp } from "./components/textSignUp";
 import { useUser } from "../../global/store/user";
-
-type buttonRedSocialJSXType = {
-  img: string;
-  msg: string;
-  singIn: () => void;
-};
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { ButtonRedSocialMap } from "./data/buttonRedSocialJSX";
 
 const Container = styled.div`
   display: grid;
@@ -26,36 +21,28 @@ const Container = styled.div`
 `;
 
 export const Index = () => {
-  const { loginWithRedirect, user: userGoogle } = useAuth0();
-  const { user, loginUser } = useUser();
-
+  const { loginWithRedirect, user, isAuthenticated } = useAuth0();
+  const { loginUser, user: UserStore } = useUser();
   const signInFace = () => {};
+  const navigate = useNavigate();
 
-  const loginWithGoogle = () => {
-    loginWithRedirect();
-    if (userGoogle) {
-      let newUser = {
-        email: userGoogle.email!,
-        name: userGoogle.name!,
-        nickName: userGoogle.nickname!,
-        picture: userGoogle.picture!,
-      };
-      loginUser(newUser);
+  if (UserStore.email != "") {
+    navigate("/home");
+  }
+
+  useEffect(() => {
+    if (user) {
+      const { email, name, nickname: nickName, picture } = user;
+      if (email && name && picture && nickName) {
+        loginUser({ email, name, nickName, picture });
+      }
     }
-  };
+  }, [isAuthenticated]);
 
-  const buttonRedSocialJSX: buttonRedSocialJSXType[] = [
-    {
-      img: FacebookImg,
-      msg: "Continue with Facebook",
-      singIn: () => signInFace(),
-    },
-    {
-      img: GoogleImg,
-      msg: "Continue with Google",
-      singIn: () => loginWithGoogle(),
-    },
-  ];
+  const buttonRedSocialJSX = ButtonRedSocialMap({
+    loginWithRedirect,
+    signInFace,
+  });
 
   return (
     <Container>
