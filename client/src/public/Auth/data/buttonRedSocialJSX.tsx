@@ -1,16 +1,22 @@
 import GoogleImg from "../assets/google.png";
+import FacebookImg from "../assets/Facebook.png";
 
 type Params = {
-  loginWithRedirect: () => void;
+  loginGoogle: () => void;
+  loginFacebook: () => void;
 };
 
-export const ButtonRedSocialMap = ({ loginWithRedirect }: Params) => {
+export const ButtonRedSocialMap = ({ loginGoogle, loginFacebook }: Params) => {
   return [
     {
       img: GoogleImg,
       msg: "Continue with Google",
-      singIn: () => loginWithRedirect(),
+      singIn: () => loginGoogle(),
+    },
+    {
+      img: FacebookImg,
+      msg: "Continue with Facebook",
+      singIn: () => loginFacebook(),
     },
   ];
 };
-

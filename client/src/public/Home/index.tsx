@@ -1,4 +1,3 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import styled from "styled-components";
 import { useUser } from "../../global/store/user";
 
@@ -11,12 +10,10 @@ const StyledCard = styled.div`
 `;
 
 export const Index = ({}: IndexProps) => {
-  const { logout: logOutAuth } = useAuth0();
   const { user, logOut } = useUser();
 
   const handleLogOut = () => {
     logOut();
-    logOutAuth({ returnTo: window.location.origin });
   };
 
   return (

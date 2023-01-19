@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useAuth0 } from "@auth0/auth0-react";
 import IconIMG from "./assets/Icon.jpg";
 import { colorPrimary } from "../../global/styles/colors";
 import { Img } from "./components/img";
@@ -12,7 +11,12 @@ import { useUser } from "../../global/store/user";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ButtonRedSocialMap } from "./data/buttonRedSocialJSX";
-import { BtnFacebook } from "./components/btnFacebook";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  FacebookAuthProvider,
+} from "firebase/auth";
+import { auth } from "../../firebase";
 
 const Container = styled.div`
   display: grid;
@@ -22,31 +26,49 @@ const Container = styled.div`
 `;
 
 export const Index = () => {
-  const { loginWithRedirect, user, isAuthenticated } = useAuth0();
-  const { loginUser, user: UserStore } = useUser();
+  const { loginUser } = useUser();
 
   const navigate = useNavigate();
 
-  useEffect(() => {
+  const loginGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    const { user } = await signInWithPopup(auth, provider);
     if (user) {
-      const { email, name, nickname: nickName, picture } = user;
-      if (email && name && picture && nickName) {
-        loginUser({ email, name, nickName, picture });
-        navigate("/home");
-      }
+      const { email, photoURL: picture, displayName: name } = user;
+      loginUser({
+        email: email!,
+        name: name!,
+        nickName: name!,
+        picture: picture!,
+      });
     }
-  }, [isAuthenticated]);
+    navigate("/home");
+  };
+
+  const loginFacebook = async () => {
+    const provider = new FacebookAuthProvider();
+    const { user } = await signInWithPopup(auth, provider);
+    if (user) {
+      const { email, photoURL: picture, displayName: name } = user;
+      loginUser({
+        email: email!,
+        name: name!,
+        nickName: name!,
+        picture: picture!,
+      });
+    }
+    navigate("/home");
+  };
 
   const buttonRedSocialJSX = ButtonRedSocialMap({
-    loginWithRedirect,
+    loginGoogle,
+    loginFacebook,
   });
 
   return (
     <Container>
       <Img IconIMG={IconIMG} />
       <Title />
-
-      <BtnFacebook />
 
       {!!buttonRedSocialJSX.length &&
         buttonRedSocialJSX.map((v) => (
