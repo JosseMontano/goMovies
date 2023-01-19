@@ -12,6 +12,7 @@ import { useUser } from "../../global/store/user";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ButtonRedSocialMap } from "./data/buttonRedSocialJSX";
+import { BtnFacebook } from "./components/btnFacebook";
 
 const Container = styled.div`
   display: grid;
@@ -23,31 +24,29 @@ const Container = styled.div`
 export const Index = () => {
   const { loginWithRedirect, user, isAuthenticated } = useAuth0();
   const { loginUser, user: UserStore } = useUser();
-  const signInFace = () => {};
-  const navigate = useNavigate();
 
-  if (UserStore.email != "") {
-    navigate("/home");
-  }
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
       const { email, name, nickname: nickName, picture } = user;
       if (email && name && picture && nickName) {
         loginUser({ email, name, nickName, picture });
+        navigate("/home");
       }
     }
   }, [isAuthenticated]);
 
   const buttonRedSocialJSX = ButtonRedSocialMap({
     loginWithRedirect,
-    signInFace,
   });
 
   return (
     <Container>
       <Img IconIMG={IconIMG} />
       <Title />
+
+      <BtnFacebook />
 
       {!!buttonRedSocialJSX.length &&
         buttonRedSocialJSX.map((v) => (
@@ -58,7 +57,6 @@ export const Index = () => {
             singIn={v.singIn}
           />
         ))}
-
       <Or />
       <Btn colorPrimary={colorPrimary} />
       <TextSignUp colorPrimary={colorPrimary} />

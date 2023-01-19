@@ -1,6 +1,4 @@
 import "./App.css";
-import { Index as Login } from "./public/Auth";
-import { Index as Home } from "./public/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./global/components/protectedRoute";
 import { RouteMap } from "./route";

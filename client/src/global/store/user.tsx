@@ -5,7 +5,7 @@ interface UserType {
   email: string;
   name: string;
   nickName: string;
-  picture: string;
+  picture?: string;
 }
 
 interface Type {
