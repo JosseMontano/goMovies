@@ -71,6 +71,7 @@ export const Index = () => {
             singIn={v.singIn}
           />
         ))}
+
       <Or />
       <Btn colorPrimary={colorPrimary} />
       <TextSignUp colorPrimary={colorPrimary} />
