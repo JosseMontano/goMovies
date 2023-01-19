@@ -2,6 +2,7 @@ package database
 
 import (
 	"github.com/JosseMontano/go-series/models"
+	"github.com/JosseMontano/go-series/utils"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -9,11 +10,11 @@ import (
 var DB *gorm.DB
 
 func Connect() {
-	host := "localhost"
-	user := "postgres"
-	password := "8021947cbba"
-	dbName := "goMovies"
-	port := "5432"
+	host := utils.DotEnvVariable("HOST")
+	user := utils.DotEnvVariable("USER")
+	password := utils.DotEnvVariable("PASSWORD")
+	dbName := utils.DotEnvVariable("DBNAME")
+	port := utils.DotEnvVariable("PORT")
 
 	DSN := "host=" + host + " user=" + user + " password=" + password + " dbname=" + dbName + " port=" + port
 

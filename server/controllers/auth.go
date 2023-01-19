@@ -1,8 +1,10 @@
 package controllers
 
 import (
+	"time"
 	"github.com/JosseMontano/go-series/database"
 	"github.com/JosseMontano/go-series/models"
+	"github.com/JosseMontano/go-series/utils"
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 	"golang.org/x/crypto/bcrypt"
@@ -10,16 +12,16 @@ import (
 
 var validate = validator.New()
 
-func ValidateStructSingUp(user models.User) []*models.ValidateUser{
+func ValidateStructSingUp(user models.User) []*models.ValidateUser {
 	var errors []*models.ValidateUser
 	err := validate.Struct(user)
-	if err != nil{
-		for _, err := range err.(validator.ValidationErrors){
+	if err != nil {
+		for _, err := range err.(validator.ValidationErrors) {
 			var element models.ValidateUser
 			element.FailedFiled = err.StructNamespace()
 			element.Tag = err.Tag()
 			element.Value = err.Param()
-			errors= append(errors, &element)
+			errors = append(errors, &element)
 		}
 	}
 	return errors
@@ -49,7 +51,7 @@ func SingUp(c *fiber.Ctx) error {
 		DisplayName: data["display_name"],
 	}
 
-	if errors := ValidateStructSingUp(user); errors !=nil{
+	if errors := ValidateStructSingUp(user); errors != nil {
 		c.Status(fiber.StatusBadRequest)
 		return c.JSON(fiber.Map{
 			"message": errors,
@@ -63,4 +65,44 @@ func SingUp(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(user)
+}
+
+func SingIn(c *fiber.Ctx) error {
+	var data map[string]string
+
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+
+	var user models.User
+
+	database.DB.Where("email", data["email"]).First(&user)
+
+	if user.Id == 0 {
+		c.Status(404)
+		return c.JSON(fiber.Map{
+			"message": "not found",
+		})
+	}
+
+	if err := bcrypt.CompareHashAndPassword(user.Password, []byte(data["password"])); err != nil {
+		c.Status(400)
+		return c.JSON(fiber.Map{
+			"message": "incorrect password",
+		})
+	}
+
+	timeExp := time.Now().Add(24 * time.Hour)
+	token, err := utils.GenerateJwt(user, timeExp)
+	if err != nil {
+		c.SendStatus(fiber.StatusInternalServerError)
+		return c.JSON(fiber.Map{
+			"message": err,
+		})
+	}
+
+	return c.JSON(fiber.Map{
+		"message": "success",
+		"token":   token,
+	})
 }

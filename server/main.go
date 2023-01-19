@@ -5,9 +5,11 @@ import (
 	"github.com/JosseMontano/go-series/routes"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	godotenv.Load()
 	database.Connect()
 
 	app := fiber.New()
