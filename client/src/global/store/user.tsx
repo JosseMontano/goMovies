@@ -1,24 +1,23 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 
+
 interface UserType {
   email: string;
-  name: string;
-  nickName: string;
-  picture?: string;
+  photoURL: string;
+  displayName: string;
 }
 
 interface Type {
   user: UserType;
   loginUser: (user: UserType) => void;
-  logOut:()=>void
+  logOut: () => void;
 }
 
 const initialValueUser: UserType = {
   email: "",
-  name: "",
-  nickName: "",
-  picture: "",
+  displayName: "",
+  photoURL: "",
 };
 
 export const useUser = create(
@@ -35,6 +34,7 @@ export const useUser = create(
           user: initialValueUser,
         }));
       },
+     
     }),
     {
       name: "user",

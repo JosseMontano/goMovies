@@ -8,7 +8,6 @@ import { Or } from "./components/or";
 import { Btn } from "./components/btn";
 import { TextSignUp } from "./components/textSignUp";
 import { useUser } from "../../global/store/user";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ButtonRedSocialMap } from "./data/buttonRedSocialJSX";
 import {
@@ -26,21 +25,15 @@ const Container = styled.div`
 `;
 
 export const Index = () => {
-  const { loginUser } = useUser();
-
+  const { loginUser, user } = useUser();
   const navigate = useNavigate();
 
   const loginGoogle = async () => {
     const provider = new GoogleAuthProvider();
     const { user } = await signInWithPopup(auth, provider);
-    if (user) {
-      const { email, photoURL: picture, displayName: name } = user;
-      loginUser({
-        email: email!,
-        name: name!,
-        nickName: name!,
-        picture: picture!,
-      });
+    const { email, photoURL, displayName } = user;
+    if (email && displayName && photoURL) {
+      loginUser({ email, photoURL, displayName });
     }
     navigate("/home");
   };
@@ -48,14 +41,9 @@ export const Index = () => {
   const loginFacebook = async () => {
     const provider = new FacebookAuthProvider();
     const { user } = await signInWithPopup(auth, provider);
-    if (user) {
-      const { email, photoURL: picture, displayName: name } = user;
-      loginUser({
-        email: email!,
-        name: name!,
-        nickName: name!,
-        picture: picture!,
-      });
+    const { email, photoURL, displayName } = user;
+    if (email && displayName && photoURL) {
+      loginUser({ email, photoURL, displayName });
     }
     navigate("/home");
   };
@@ -64,6 +52,10 @@ export const Index = () => {
     loginGoogle,
     loginFacebook,
   });
+
+  if (user.email != "") {
+    navigate("/home");
+  }
 
   return (
     <Container>

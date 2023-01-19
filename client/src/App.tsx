@@ -1,11 +1,11 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./global/components/protectedRoute";
 import { RouteMap } from "./route";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         {RouteMap.map((v) => (
           <Route
@@ -15,7 +15,7 @@ function App() {
           />
         ))}
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
