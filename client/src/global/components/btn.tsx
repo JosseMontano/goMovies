@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 type BtnProps = {
   colorPrimary: string;
+  msg: string;
 };
 
 const Container = styled.button<{ colorPrimary: string }>`
@@ -14,6 +15,6 @@ const Container = styled.button<{ colorPrimary: string }>`
   margin-top: 10px;
 `;
 
-export const Btn = ({ colorPrimary }: BtnProps) => (
-  <Container colorPrimary={colorPrimary}>Sign in with password</Container>
+export const Btn = ({ colorPrimary, msg }: BtnProps) => (
+  <Container colorPrimary={colorPrimary}>{msg}</Container>
 );

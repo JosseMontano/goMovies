@@ -1,5 +1,6 @@
 import { Index as Login } from "./public/Auth";
 import { Index as Home } from "./public/Home";
+import { Index as Register } from "./public/Register";
 
 export const RouteMap = [
   {
@@ -9,5 +10,9 @@ export const RouteMap = [
   {
     path: "/home",
     element: <Home />,
+  },
+  {
+    path: "/sign-up",
+    element: <Register />,
   },
 ];

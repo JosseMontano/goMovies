@@ -6,8 +6,10 @@ specifiers:
   '@types/styled-components': ^5.1.26
   '@vitejs/plugin-react': ^2.2.0
   firebase: ^9.15.0
+  jz-modal: ^0.0.1
   react: ^18.2.0
   react-dom: ^18.2.0
+  react-icons: ^4.7.1
   react-router-dom: ^6.7.0
   styled-components: ^5.3.6
   typescript: ^4.6.4
@@ -16,8 +18,10 @@ specifiers:
 
 dependencies:
   firebase: 9.15.0
+  jz-modal: 0.0.1_react@18.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-icons: 4.7.1_react@18.2.0
   react-router-dom: 6.7.0_react-dom@18.2.0+react@18.2.0
   styled-components: 5.3.6_react-dom@18.2.0+react@18.2.0
   zustand: 4.3.2_react@18.2.0
@@ -1428,6 +1432,18 @@ packages:
     hasBin: true
     dev: true
 
+  /jz-modal/0.0.1_react@18.2.0:
+    resolution: {integrity: sha512-6X5eS2f/qN4otGteEdFKFvcvnFCN4jJizGgbGB8pajbHKRJ0+rX94P/9vlg5eR5prO/i4GWGUxNSc/kSv0COjQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+    dependencies:
+      react: 18.2.0
+      zustand: 4.3.2_react@18.2.0
+    transitivePeerDependencies:
+      - immer
+    dev: false
+
   /lodash.camelcase/4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
     dev: false
@@ -1562,6 +1578,14 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-icons/4.7.1_react@18.2.0:
+    resolution: {integrity: sha512-yHd3oKGMgm7zxo3EA7H2n7vxSoiGmHk5t6Ou4bXsfcgWyhfDKMpyKfhHR6Bjnn63c+YXBLBPUql9H4wPJM6sXw==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:

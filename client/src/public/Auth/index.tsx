@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import IconIMG from "./assets/Icon.jpg";
+import IconIMG from "./assets/IconGo.png";
 import { colorPrimary } from "../../global/styles/colors";
 import { Img } from "./components/img";
 import { Title } from "./components/title";
 import { ButtonRedSocial } from "./components/buttonRedSocial";
 import { Or } from "./components/or";
-import { Btn } from "./components/btn";
+import { Btn } from "../../global/components/btn";
 import { TextSignUp } from "./components/textSignUp";
 import { useUser } from "../../global/store/user";
 import { useNavigate } from "react-router-dom";
@@ -27,6 +27,10 @@ const Container = styled.div`
 export const Index = () => {
   const { loginUser, user } = useUser();
   const navigate = useNavigate();
+
+  const redirecToCreateAccount = () => {
+    navigate("/sign-up");
+  };
 
   const loginGoogle = async () => {
     const provider = new GoogleAuthProvider();
@@ -73,8 +77,11 @@ export const Index = () => {
         ))}
 
       <Or />
-      <Btn colorPrimary={colorPrimary} />
-      <TextSignUp colorPrimary={colorPrimary} />
+      <Btn colorPrimary={colorPrimary} msg={"Sign in with password"} />
+      <TextSignUp
+        redirecToCreateAccount={redirecToCreateAccount}
+        colorPrimary={colorPrimary}
+      />
     </Container>
   );
 };

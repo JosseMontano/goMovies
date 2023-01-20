@@ -1,8 +1,8 @@
-import React from "react";
 import styled from "styled-components";
 
 type TextSignUpProps = {
   colorPrimary: string;
+  redirecToCreateAccount: () => void;
 };
 
 const StyledSignUp = styled.p<{ colorPrimary: string }>`
@@ -12,8 +12,11 @@ const StyledSignUp = styled.p<{ colorPrimary: string }>`
   }
 `;
 
-export const TextSignUp = ({ colorPrimary }: TextSignUpProps) => (
+export const TextSignUp = ({
+  colorPrimary,
+  redirecToCreateAccount,
+}: TextSignUpProps) => (
   <StyledSignUp colorPrimary={colorPrimary}>
-    Don't have an account? <span>sign up</span>
+    Don't have an account? <span onClick={redirecToCreateAccount}>sign up</span>
   </StyledSignUp>
 );

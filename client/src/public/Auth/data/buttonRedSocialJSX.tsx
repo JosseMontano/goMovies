@@ -1,5 +1,5 @@
-import GoogleImg from "../assets/google.png";
-import FacebookImg from "../assets/Facebook.png";
+import GoogleImg from "@/global/assets/google.png";
+import FacebookImg from "@/global/assets/Facebook.png";
 
 type Params = {
   loginGoogle: () => void;
