@@ -1,13 +1,14 @@
 package controllers
 
 import (
-	"time"
 	"github.com/JosseMontano/go-series/database"
 	"github.com/JosseMontano/go-series/models"
 	"github.com/JosseMontano/go-series/utils"
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 	"golang.org/x/crypto/bcrypt"
+	"gopkg.in/gomail.v2"
+	"time"
 )
 
 var validate = validator.New()
@@ -104,5 +105,24 @@ func SingIn(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{
 		"message": "success",
 		"token":   token,
+	})
+}
+
+func RecuperateAccount(c *fiber.Ctx) error {
+	msg := gomail.NewMessage()
+	msg.SetHeader("From", "eljosema505@gmail.com")
+	msg.SetHeader("To", "josemariazambranamontano123@gmail.com")
+	msg.SetHeader("Subject", "Recuperate account")
+	msg.SetBody("text/html", "<b>This is the code</b>")
+	/* 	msg.Attach("/home/User/cat.jpg") */
+	n := gomail.NewDialer("smtp.gmail.com", 587, "eljosema505@gmail.com", "cttwmwtvleqtnoju")
+
+	if err := n.DialAndSend(msg); err != nil {
+		panic(err)
+	}
+
+	c.Status(200)
+	return c.JSON(fiber.Map{
+		"message": "the mail was sent",
 	})
 }

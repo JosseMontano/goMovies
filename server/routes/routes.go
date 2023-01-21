@@ -12,4 +12,5 @@ func Setup(app *fiber.App) {
 
 	app.Post("/api/sign-up", controllers.SingUp)
 	app.Post("/api/sign-in", controllers.SingIn)
+	app.Post("/api/recuperate-account", controllers.RecuperateAccount)
 }
