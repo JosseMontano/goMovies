@@ -13,8 +13,13 @@ const Container = styled.button<{ colorPrimary: string }>`
   width: 300px;
   height: 50px;
   margin-top: 10px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const Btn = ({ colorPrimary, msg }: BtnProps) => (
-  <Container type="submit" colorPrimary={colorPrimary}>{msg}</Container>
+  <Container type="submit" colorPrimary={colorPrimary}>
+    {msg}
+  </Container>
 );

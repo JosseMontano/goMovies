@@ -1,16 +1,8 @@
 import { MdEmail } from "react-icons/md";
 import { GiPadlock } from "react-icons/gi";
 import { AiTwotoneEyeInvisible } from "react-icons/ai";
-import { IconType } from "react-icons";
-
-interface Type {
-  type: string;
-  name: string;
-  value: string;
-  placeholder: string;
-  icon: IconType;
-  extra?: JSX.Element;
-}
+import { BsFillPeopleFill } from "react-icons/bs";
+import CustomFormType from "../interfaces/form";
 
 function showIconExtra() {
   return (
@@ -24,20 +16,20 @@ function showIconExtra() {
   );
 }
 
-export const customForm: Type[] = [
+export const customForm: CustomFormType[] = [
   {
     type: "input",
     name: "email",
     value: "",
     placeholder: "Email",
-    icon: MdEmail,
+    icon: <MdEmail />,
   },
   {
     type: "password",
     name: "password",
     value: "",
     placeholder: "Password",
-    icon: GiPadlock,
+    icon: <GiPadlock />,
     extra: showIconExtra(),
   },
   {
@@ -45,7 +37,7 @@ export const customForm: Type[] = [
     name: "password_confirmation",
     value: "",
     placeholder: "Password Confirmation",
-    icon: MdEmail,
+    icon: <GiPadlock />,
     extra: showIconExtra(),
   },
   {
@@ -53,6 +45,11 @@ export const customForm: Type[] = [
     name: "display_name",
     value: "",
     placeholder: "Name",
-    icon: MdEmail,
+    icon: <BsFillPeopleFill />,
+  },
+  {
+    type: "checkbox",
+    name: "accept_conditions",
+    value: "",
   },
 ];
