@@ -4,16 +4,21 @@ import GoogleImg from "@/global/assets/google.png";
 import FacebookImg from "@/global/assets/Facebook.png";
 import { colorPrimary } from "@/global/styles/colors";
 import { Btn } from "@/global/components/btn";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 import { Icon } from "./components/icon";
 import { Title } from "./components/title";
 import { ContainerBtn } from "./components/containerBtn";
 import { Footer } from "./components/footer";
-import UserType from "@/global/interfaces/user";
 import { Formik, Form, ErrorMessage } from "formik";
 import MyTextInput from "@/global/components/myTextInput";
 import { customForm } from "./data/customForm";
-import signUp from "./validations/signUp";
+import signUp, { initialValues } from "./validations/signUp";
+import SingUpType from "./interfaces/signUp";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { signUpApi } from "./api/auth";
+import { useState } from "react";
+import { useUser } from "@/global/store/user";
+import UserType from "@/global/interfaces/user";
 
 const Container = styled.div`
   height: 100vh;
@@ -23,6 +28,7 @@ const Container = styled.div`
   form {
     display: grid;
     margin-top: 10px;
+    max-width: 300px;
   }
   img {
   }
@@ -64,16 +70,27 @@ const InputContainer = styled.div`
 
 type IndexProps = {};
 
-const initialValues: { [key: string]: any } = {};
-
-for (const input of customForm) {
-  initialValues[input.name] = input.value;
-}
-
 export const Index = ({}: IndexProps) => {
   const navigate = useNavigate();
+  const { loginUser, user } = useUser();
+  const [msgError, setMsgError] = useState("");
+  const { mutate, isLoading, isError } = useMutation({
+    mutationFn: signUpApi,
+    onError: (error) => {
+      if (error instanceof Error) {
+        setMsgError(error.message);
+      }
+    },
+  });
 
-  const handleSubmit = () => {};
+  const handleSubmit = (val: SingUpType) => {
+    mutate(val, {
+      onSuccess: (data: UserType) => {
+        loginUser(data);
+        navigate("/home");
+      },
+    });
+  };
 
   const signIn = () => {
     navigate("/sign-in");
@@ -89,7 +106,7 @@ export const Index = ({}: IndexProps) => {
         initialValues={initialValues}
         validationSchema={signUp}
         onSubmit={(val) => {
-          console.log(val);
+          handleSubmit(val);
         }}
       >
         <Form noValidate>
@@ -112,11 +129,16 @@ export const Index = ({}: IndexProps) => {
           <ContainerCheck>
             <input type={"checkbox"} /> Remember me
           </ContainerCheck>
-          <Btn colorPrimary={colorPrimary} msg={"Sign up"} />
+          <Btn
+            colorPrimary={colorPrimary}
+            msg={isLoading ? "Loading..." : "Sign up"}
+          />
         </Form>
       </Formik>
 
       <p>Or continue with</p>
+
+      {isError && <p className="error">{msgError}</p>}
 
       <ContainerBtn FacebookImg={FacebookImg} GoogleImg={GoogleImg} />
 

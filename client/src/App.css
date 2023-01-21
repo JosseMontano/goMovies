@@ -7,6 +7,7 @@
 }
 
 .error {
+  max-width: 300px;
   font-size: 22px;
   color: #ff4154;
 }

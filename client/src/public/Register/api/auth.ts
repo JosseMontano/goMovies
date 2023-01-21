@@ -1,4 +1,11 @@
 import api from "@/global/api/config";
-import UserType from "@/global/interfaces/user";
+import SingUpType from "../interfaces/signUp";
 
-export const signUp = (user: UserType) => api.post("sign-up", user);
+export const signUpApi = async (user: SingUpType) => {
+  try {
+    const res = await api.post("sign-up", user);
+    return res.data;
+  } catch (error: any) {
+    throw new Error(error.response.data.Message);
+  }
+};

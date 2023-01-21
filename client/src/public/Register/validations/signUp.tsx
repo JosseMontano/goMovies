@@ -1,6 +1,16 @@
 import * as Yup from "yup";
+import SingUpType from "../interfaces/signUp";
 
 const requiredText = "Este campo es obligatiorio";
+
+
+export const initialValues: SingUpType = {
+  display_name: "",
+  email: "",
+  password: "",
+  password_confirmation: "",
+};
+
 
 const signUp = Yup.object({
   email: Yup.string().required(requiredText),
