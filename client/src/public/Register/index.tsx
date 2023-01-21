@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import IconImg from "./assets/React.png";
+import IconImg from "@/global/assets/React.png";
 import GoogleImg from "@/global/assets/google.png";
 import FacebookImg from "@/global/assets/Facebook.png";
 import { useNavigate } from "react-router-dom";
