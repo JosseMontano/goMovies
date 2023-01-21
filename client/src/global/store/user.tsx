@@ -1,12 +1,8 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
+import UserType from "../interfaces/user";
 
 
-interface UserType {
-  email: string;
-  photoURL: string;
-  displayName: string;
-}
 
 interface Type {
   user: UserType;

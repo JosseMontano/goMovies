@@ -16,5 +16,5 @@ const Container = styled.button<{ colorPrimary: string }>`
 `;
 
 export const Btn = ({ colorPrimary, msg }: BtnProps) => (
-  <Container colorPrimary={colorPrimary}>{msg}</Container>
+  <Container type="submit" colorPrimary={colorPrimary}>{msg}</Container>
 );

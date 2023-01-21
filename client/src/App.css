@@ -5,3 +5,8 @@
   padding: 0px;
   margin: 0px;
 }
+
+.error {
+  font-size: 22px;
+  color: #ff4154;
+}

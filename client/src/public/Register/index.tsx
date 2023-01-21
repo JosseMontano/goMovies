@@ -4,12 +4,16 @@ import GoogleImg from "@/global/assets/google.png";
 import FacebookImg from "@/global/assets/Facebook.png";
 import { colorPrimary } from "@/global/styles/colors";
 import { Btn } from "@/global/components/btn";
-import { MdEmail } from "react-icons/md";
-import { GiPadlock } from "react-icons/gi";
-import { AiTwotoneEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-
-type IndexProps = {};
+import { Icon } from "./components/icon";
+import { Title } from "./components/title";
+import { ContainerBtn } from "./components/containerBtn";
+import { Footer } from "./components/footer";
+import UserType from "@/global/interfaces/user";
+import { Formik, Form, ErrorMessage } from "formik";
+import MyTextInput from "@/global/components/myTextInput";
+import { customForm } from "./data/customForm";
+import signUp from "./validations/signUp";
 
 const Container = styled.div`
   height: 100vh;
@@ -20,33 +24,7 @@ const Container = styled.div`
     display: grid;
     margin-top: 10px;
   }
-  /*   input {
-    margin: 5px 0px;
-    border: none;
-    height: 32px;
-    border-radius: 7px;
-    background-color: #2e2e2e;
-  } */
   img {
-    width: 150px;
-    justify-self: center;
-  }
-`;
-
-const ContainerBtn = styled.div`
-  margin: 10px 10px;
-  button {
-    border: none;
-    border-radius: 5px;
-    background-color: #2e2e2e;
-    margin: 0px 10px;
-    width: 70px;
-    height: 50px;
-  }
-  img {
-    height: 30px;
-    width: 30px;
-    background-color: transparent;
   }
 `;
 
@@ -66,7 +44,7 @@ const ContainerCheck = styled.div`
 const InputContainer = styled.div`
   display: flex;
   width: 100%;
-  margin-bottom: 15px;
+  margin-top: 10px;
   border-radius: 7px;
   div {
     padding: 10px;
@@ -84,8 +62,18 @@ const InputContainer = styled.div`
   }
 `;
 
+type IndexProps = {};
+
+const initialValues: { [key: string]: any } = {};
+
+for (const input of customForm) {
+  initialValues[input.name] = input.value;
+}
+
 export const Index = ({}: IndexProps) => {
   const navigate = useNavigate();
+
+  const handleSubmit = () => {};
 
   const signIn = () => {
     navigate("/sign-in");
@@ -93,55 +81,46 @@ export const Index = ({}: IndexProps) => {
 
   return (
     <Container>
-      <img src={IconImg} alt="" />
-      <h2>Create your Account</h2>
-      <form action="">
-        <InputContainer>
-          <div>
-            <MdEmail
-              className="icon"
-              style={{ backgroundColor: "transparent" }}
-              size={"20px"}
-            />
-          </div>
-          <input type="text" placeholder="Email" />
-        </InputContainer>
+      <Icon IconImg={IconImg} />
+      <Title msg={"Create your Account"} />
 
-        <InputContainer>
-          <div>
-            <GiPadlock
-              className="icon"
-              style={{ backgroundColor: "Transparent" }}
-              size={"20px"}
-            />
-          </div>
-          <input type="text" placeholder="password" />
-          <div>
-            <AiTwotoneEyeInvisible
-              className="icon"
-              style={{ backgroundColor: "transparent" }}
-              size={"20px"}
-            />
-          </div>
-        </InputContainer>
+      <Formik
+        validateOnChange={false}
+        initialValues={initialValues}
+        validationSchema={signUp}
+        onSubmit={(val) => {
+          console.log(val);
+        }}
+      >
+        <Form noValidate>
+          {customForm.map((v) => {
+            return (
+              <>
+                <InputContainer key={v.name}>
+                  <div>{<v.icon />}</div>
+                  <MyTextInput
+                    name={v.name}
+                    placeholder={v.placeholder}
+                    type={v.type}
+                  />
+                  {v.extra}
+                </InputContainer>
+                <ErrorMessage name={v.name} component="p" className="error" />
+              </>
+            );
+          })}
+          <ContainerCheck>
+            <input type={"checkbox"} /> Remember me
+          </ContainerCheck>
+          <Btn colorPrimary={colorPrimary} msg={"Sign up"} />
+        </Form>
+      </Formik>
 
-        <ContainerCheck>
-          <input type={"checkbox"} /> Remember me
-        </ContainerCheck>
-        <Btn colorPrimary={colorPrimary} msg={"Sign up"} />
-      </form>
       <p>Or continue with</p>
-      <ContainerBtn>
-        <button>
-          <img src={FacebookImg} alt="" />
-        </button>
-        <button>
-          <img src={GoogleImg} alt="" />
-        </button>
-      </ContainerBtn>
-      <p>
-        Already have an account? <span onClick={signIn}>Sign In</span>
-      </p>
+
+      <ContainerBtn FacebookImg={FacebookImg} GoogleImg={GoogleImg} />
+
+      <Footer signIn={signIn} />
     </Container>
   );
 };
