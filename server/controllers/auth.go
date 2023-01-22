@@ -109,13 +109,25 @@ func SingIn(c *fiber.Ctx) error {
 }
 
 func RecuperateAccount(c *fiber.Ctx) error {
+	var data map[string]string
+
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+
+	buffer := utils.Random(5)
+
 	msg := gomail.NewMessage()
+	text := "<b>This is the code: " + buffer + "</b>"
 	msg.SetHeader("From", "eljosema505@gmail.com")
-	msg.SetHeader("To", "josemariazambranamontano123@gmail.com")
+	msg.SetHeader("To", data["to"])
 	msg.SetHeader("Subject", "Recuperate account")
-	msg.SetBody("text/html", "<b>This is the code</b>")
+	msg.SetBody("text/html", text)
 	/* 	msg.Attach("/home/User/cat.jpg") */
-	n := gomail.NewDialer("smtp.gmail.com", 587, "eljosema505@gmail.com", "cttwmwtvleqtnoju")
+
+	gmail := utils.DotEnvVariable("GMAIL")
+	codeGmail := utils.DotEnvVariable("CODE_GMAIL")
+	n := gomail.NewDialer("smtp.gmail.com", 587, gmail, codeGmail)
 
 	if err := n.DialAndSend(msg); err != nil {
 		panic(err)
