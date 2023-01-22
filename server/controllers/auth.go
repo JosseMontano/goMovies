@@ -108,17 +108,25 @@ func SingIn(c *fiber.Ctx) error {
 	})
 }
 
-func RecuperateAccount(c *fiber.Ctx) error {
+func SendCodeToGmail(c *fiber.Ctx) error {
 	var data map[string]string
 
 	if err := c.BodyParser(&data); err != nil {
 		return err
 	}
 
-	buffer := utils.Random(5)
+	numberRandom := utils.Random(5)
+
+	user := models.User{
+		Email: data["email"],
+	}
+
+	database.DB.Model(&user).
+		Where("email = ?", data["to"]).
+		Update("RecuperateAccount", numberRandom)
 
 	msg := gomail.NewMessage()
-	text := "<b>This is the code: " + buffer + "</b>"
+	text := "<b>This is the code: " + numberRandom + "</b>"
 	msg.SetHeader("From", "eljosema505@gmail.com")
 	msg.SetHeader("To", data["to"])
 	msg.SetHeader("Subject", "Recuperate account")
@@ -137,4 +145,40 @@ func RecuperateAccount(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{
 		"message": "the mail was sent",
 	})
+}
+
+func RecuperateAccount(c *fiber.Ctx) error {
+	var data map[string]string
+
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+
+	user := models.User{}
+
+	database.DB.
+		Where("email = ?", data["email"]).Where("recuperate_account = ?", data["recuperate_account"]).
+		First(&user)
+
+	if user.Id == 0 {
+		c.Status(404)
+		return c.JSON(fiber.Map{
+			"message": "the code of the email is incorrect",
+		})
+	}
+
+	password, _ := bcrypt.GenerateFromPassword([]byte(data["password"]), 14)
+
+	newUser := models.User{
+		Password: password,
+	}
+
+	database.DB.Model(&newUser).
+		Where("id = ?", user.Id).
+		Update("password", password)
+
+	return c.JSON(fiber.Map{
+		"message": "The password was updated successfully",
+	})
+
 }
