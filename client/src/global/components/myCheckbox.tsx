@@ -1,11 +1,12 @@
-import { ErrorMessage, useField } from "formik";
+import { useField } from "formik";
 import styled from "styled-components";
 
-const Container = styled.div`
+const Container = styled.div<{ error: any }>`
   display: flex;
   align-items: center;
-  span{
+  span {
     margin-left: 5px;
+    color: ${(p) => p.error && "red"};
   }
 `;
 
@@ -16,15 +17,14 @@ type Props = {
 };
 
 function MyCheckBox({ label, ...props }: Props) {
-  const [field] = useField({ ...props, type: "checkbox" });
+  const [field, meta] = useField({ ...props, type: "checkbox" });
+  let error = meta.touched ? meta.error && true : false;
   return (
     <>
-      <Container>
-        <input className="full" {...field} {...props} />
+      <Container title={meta.error} error={error}>
+        <input {...field} {...props} />
         <span>{label}</span>
       </Container>
-
-      <ErrorMessage name={props.name} component="p" className="error" />
     </>
   );
 }

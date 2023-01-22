@@ -1,4 +1,4 @@
-import { Formik, Form } from "formik";
+import { Formik, Form, FormikErrors } from "formik";
 import { colorPrimary } from "@/global/styles/colors";
 import { Btn } from "@/global/components/btn";
 import { customForm } from "../../data/customForm";

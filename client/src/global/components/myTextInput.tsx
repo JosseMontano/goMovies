@@ -1,17 +1,20 @@
-import { ErrorMessage, useField } from "formik";
+import { ErrorMessage, FieldMetaProps, useField } from "formik";
+import { useEffect } from "react";
 
 type Props = {
+  title?: string;
   placeholder: string;
   name: string;
-  type:string
+  type: string;
 };
 
-function MyTextInput({...props }: Props) {
-  const [field] = useField(props);
+function MyTextInput({ title, ...props }: Props) {
+  const [field, meta] = useField(props);
+
   return (
     <>
-      <input className="full" {...field} {...props} />
-{/*       <ErrorMessage name={props.name} component="p" className="error" /> */}
+      <input {...field} {...props} />
+      {/*       <ErrorMessage name={props.name} component="p" className="error" /> */}
     </>
   );
 }
