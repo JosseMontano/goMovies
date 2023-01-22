@@ -48,7 +48,8 @@ export const Index = ({}: IndexProps) => {
   });
 
   const handleSubmit = (val: SingUpType) => {
-    mutate(val, {
+    const { accept_conditions: _, ...newObj } = val;
+    mutate(newObj, {
       onSuccess: (data: UserType) => {
         loginUser(data);
         navigate("/home");

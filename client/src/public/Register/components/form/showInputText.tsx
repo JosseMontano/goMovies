@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import CustomFormType from "../../interfaces/form";
-import MyTextInput from "@/global/components/myTextInput";
-import {useField } from "formik";
+import { useField } from "formik";
 
 const colorError = "#581d26";
 const border = `1px solid ${colorError}`;
@@ -46,7 +45,7 @@ export const ShowInputText = ({ v }: ShowInputTextProps) => {
     <>
       <InputContainer title={meta.error} key={v.name} error={error}>
         <div>{v.icon}</div>
-        <MyTextInput name={v.name} placeholder={v.placeholder!} type={v.type} />
+        <input {...field} {...obj} />
         {v.extra}
       </InputContainer>
     </>
