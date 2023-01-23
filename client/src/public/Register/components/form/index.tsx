@@ -36,7 +36,7 @@ export const IndexForm = ({ handleSubmit, isLoading }: ComponentFormProps) => {
         handleSubmit(val);
       }}
     >
-      <Form noValidate>
+      <Form noValidate data-testid="customBtn" >
         {customForm.map((v) => showContent(v))}
         <Btn colorPrimary={colorPrimary} msg={msg} />
       </Form>
