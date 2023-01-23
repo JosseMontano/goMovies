@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 type TitleProps = {
@@ -12,4 +11,6 @@ const StyledTitle = styled.h2`
   margin-top: 10px;
 `;
 
-export const Title = ({ msg }: TitleProps) => <StyledTitle>{msg}</StyledTitle>;
+export const Title = ({ msg }: TitleProps) => (
+  <StyledTitle data-testid="title">{msg}</StyledTitle>
+);
