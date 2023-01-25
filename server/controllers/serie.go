@@ -41,6 +41,7 @@ func CreateSerie(c *fiber.Ctx) error {
 	}
 
 	database.DB.Create(&serie)
+	database.DB.Model(&serie).Association("Chapters").Find(&serie.Chapters)
 
 	return c.JSON(serie)
 
@@ -78,6 +79,7 @@ func UpdateSerie(c *fiber.Ctx) error {
 	}
 
 	database.DB.Debug().Model(&serie).Updates(serie)
+	database.DB.Model(&serie).Association("Chapters").Find(&serie.Chapters)
 
 	return c.JSON(serie)
 }
