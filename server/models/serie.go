@@ -1,6 +1,6 @@
 package models
 
-type Series struct {
+type Serie struct {
 	Id          string    `json:"id" gorm:"primaryKey"`
 	Title       string    `json:"title"`
 	Description string    `json:"description"`
