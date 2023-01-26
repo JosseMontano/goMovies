@@ -84,6 +84,13 @@ func UpdateChapters(c *fiber.Ctx) error {
 		Url:         data["url"],
 	}
 
+	if err := ValidateCreateChapter(chapter); err != "" {
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"message": err,
+		})
+	}
+
 	database.DB.Debug().Model(models.Chapter{}).Where("id", idParams).Updates(&chapter)
 	c.Status(200)
 	return c.JSON(chapter)

@@ -3,8 +3,23 @@ import { Index as Home } from "./public/Home";
 import { Index as Register } from "./public/Register";
 import { Index as Loading } from "./public/loading";
 import { Index as Welcome } from "./public/welcome";
+import { Index as LoginBack } from "./public/loginBack";
 
-export const RouteMap = [
+export enum RouteEnum {
+  loading = "/",
+  welcome = "/welcome",
+  login = "/login",
+  signIn = "/sign-in",
+  home = "/home",
+  signUp = "/sign-up",
+}
+
+interface Map {
+  path: string;
+  element: JSX.Element;
+}
+
+export const RouteMap:Map[] = [
   {
     path: "/",
     element: <Loading />,
@@ -18,6 +33,10 @@ export const RouteMap = [
     element: <Login />,
   },
   {
+    path: "/sign-in",
+    element: <LoginBack />,
+  },
+  {
     path: "/home",
     element: <Home />,
   },
@@ -26,3 +45,4 @@ export const RouteMap = [
     element: <Register />,
   },
 ];
+

@@ -1,7 +1,8 @@
+import { requiredText } from "@/global/utilities/fieldRequiered";
 import * as Yup from "yup";
 import SingUpType from "../interfaces/signUp";
 
-const requiredText = "Este campo es obligatiorio";
+
 
 export const initialValues: SingUpType = {
   display_name: "",

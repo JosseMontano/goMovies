@@ -1,7 +1,7 @@
 import styled from "styled-components";
-
+import IconImg from "@/global/assets/React.png";
 type IconProps = {
-  IconImg: string;
+
 };
 
 const Img = styled.img`
@@ -24,6 +24,6 @@ const Img = styled.img`
   }
 `;
 
-export const Icon = ({ IconImg }: IconProps) => (
+export const Icon = ({  }: IconProps) => (
   <Img data-testid="icon" src={IconImg} />
 );

@@ -1,12 +1,13 @@
 import styled from "styled-components";
+import GoogleImg from "@/global/assets/google.png";
+import FacebookImg from "@/global/assets/Facebook.png";
 
-type ContainerBtnProps = {
-  FacebookImg: string;
-  GoogleImg: string;
-};
+type BtnSocialMediaProps = {};
 
 const Container = styled.div`
   margin: 10px 10px;
+  display: flex;
+  justify-content: center;
   button {
     border: none;
     border-radius: 5px;
@@ -22,8 +23,8 @@ const Container = styled.div`
   }
 `;
 
-export const ContainerBtn = ({ FacebookImg, GoogleImg }: ContainerBtnProps) => (
-  <Container>
+export const BtnSocialMedia = ({}: BtnSocialMediaProps) => (
+    <Container>
     <button>
       <img src={FacebookImg} alt="" />
     </button>

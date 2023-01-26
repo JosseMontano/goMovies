@@ -4,8 +4,8 @@ import { Btn } from "@/global/components/btn";
 import { customForm } from "../../data/customForm";
 import signUp, { initialValues } from "../../validations/signUp";
 import SingUpType from "../../interfaces/signUp";
-import { ShowInputText } from "./showInputText";
-import { ShowInputCheck } from "./showInputCheckbox";
+import { ShowInputText } from "../../../../global/components/loginRegister/showInputText";
+import { ShowInputCheck } from "../../../../global/components/loginRegister/showInputCheckbox";
 import CustomFormType from "../../interfaces/form";
 
 type ComponentFormProps = {

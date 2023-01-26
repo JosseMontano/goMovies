@@ -1,11 +1,5 @@
 import styled from "styled-components";
-import IconImg from "@/global/assets/React.png";
-import GoogleImg from "@/global/assets/google.png";
-import FacebookImg from "@/global/assets/Facebook.png";
 import { useNavigate } from "react-router-dom";
-import { Icon } from "./components/icon";
-import { Title } from "./components/title";
-import { ContainerBtn } from "./components/containerBtn";
 import { Footer } from "./components/footer";
 import SingUpType from "./interfaces/signUp";
 import { useMutation } from "@tanstack/react-query";
@@ -14,6 +8,11 @@ import { useState } from "react";
 import { useUser } from "@/global/store/user";
 import UserType from "@/global/interfaces/user";
 import { IndexForm } from "./components/form";
+import {
+  BtnSocialMedia,
+  Icon,
+  Title,
+} from "@/global/components/loginRegister/";
 
 const Container = styled.div`
   height: 100vh;
@@ -63,7 +62,7 @@ export const Index = ({}: IndexProps) => {
 
   return (
     <Container>
-      <Icon IconImg={IconImg} />
+      <Icon />
 
       <Title msg={"Create your Account"} />
 
@@ -73,7 +72,7 @@ export const Index = ({}: IndexProps) => {
 
       {isError && <p className="error">{msgError}</p>}
 
-      <ContainerBtn FacebookImg={FacebookImg} GoogleImg={GoogleImg} />
+      <BtnSocialMedia />
 
       <Footer signIn={signIn} />
     </Container>

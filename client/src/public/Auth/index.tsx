@@ -8,7 +8,7 @@ import { Or } from "./components/or";
 import { Btn } from "../../global/components/btn";
 import { TextSignUp } from "./components/textSignUp";
 import { useUser } from "../../global/store/user";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { ButtonRedSocialMap } from "./data/buttonRedSocialJSX";
 import {
   GoogleAuthProvider,
@@ -16,7 +16,7 @@ import {
   FacebookAuthProvider,
 } from "firebase/auth";
 import { auth } from "../../firebase";
-
+import { RouteEnum } from "@/route";
 const Container = styled.div`
   display: grid;
   height: 100vh;
@@ -77,7 +77,9 @@ export const Index = () => {
         ))}
 
       <Or />
-      <Btn colorPrimary={colorPrimary} msg={"Sign in with password"} />
+      <NavLink to={RouteEnum.signIn}>
+        <Btn colorPrimary={colorPrimary} msg={"Sign in with password"} />
+      </NavLink>
       <TextSignUp
         redirecToCreateAccount={redirecToCreateAccount}
         colorPrimary={colorPrimary}

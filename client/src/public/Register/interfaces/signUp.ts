@@ -3,5 +3,5 @@ export default interface SingUpType {
   password: string;
   password_confirmation: string;
   display_name: string;
-  accept_conditions?:Boolean;
+  accept_conditions?:Boolean | string;
 }

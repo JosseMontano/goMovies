@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CustomFormType from "../../interfaces/form";
+import CustomFormType from "../../../public/Register/interfaces/form";
 import { useField } from "formik";
 
 const colorError = "#581d26";

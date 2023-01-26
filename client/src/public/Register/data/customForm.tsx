@@ -20,14 +20,12 @@ export const customForm: CustomFormType[] = [
   {
     type: "input",
     name: "email",
-    value: "",
     placeholder: "Email",
     icon: <MdEmail />,
   },
   {
     type: "password",
     name: "password",
-    value: "",
     placeholder: "Password",
     icon: <GiPadlock />,
     extra: showIconExtra(),
@@ -35,7 +33,6 @@ export const customForm: CustomFormType[] = [
   {
     type: "password",
     name: "password_confirmation",
-    value: "",
     placeholder: "Password Confirmation",
     icon: <GiPadlock />,
     extra: showIconExtra(),
@@ -43,13 +40,11 @@ export const customForm: CustomFormType[] = [
   {
     type: "input",
     name: "display_name",
-    value: "",
     placeholder: "Name",
     icon: <BsFillPeopleFill />,
   },
   {
     type: "checkbox",
     name: "accept_conditions",
-    value: "",
   },
 ];
