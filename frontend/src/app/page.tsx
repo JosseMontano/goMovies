@@ -1,9 +1,9 @@
 "use client";
 
 import styled from "styled-components";
-import { Icon } from "./global/components/icon";
-import { Loader } from "./global/components/loader";
-import ImgReact from "./global/assets/React.png";
+import { Icon } from "./index/components/icon";
+import { Loader } from "./index/components/loader";
+import ImgReact from "./index/assets/React.png";
 
 import { useRouter } from "next/navigation";
 
