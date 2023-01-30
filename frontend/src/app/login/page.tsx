@@ -14,6 +14,7 @@ import {
 import { auth } from "../firebase";
 import { useRouter } from "next/navigation";
 import { ButtonRedSocial } from "./components/buttonRedSocial";
+import { useUser } from "../global/store/user";
 
 type PageProps = {};
 
@@ -27,7 +28,8 @@ const Containter = styled.div`
 const Page = ({}: PageProps) => {
   const router = useRouter();
 
-  const loginUser = () => {};
+
+  const {loginUser} = useUser()
 
   function validateFormWithJS(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
