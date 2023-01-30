@@ -6,7 +6,7 @@ describe("Icon", () => {
   test("The component is rendered", () => {
     const idImg = "icon";
     const urlImg = "src/assets/img1";
-    render(<Icon IconImg={urlImg} />);
+    render(<Icon />);
     const icon = screen.getByTestId(idImg);
     const imgObtained = icon.getAttribute("src");
     expect(imgObtained).equal(urlImg);

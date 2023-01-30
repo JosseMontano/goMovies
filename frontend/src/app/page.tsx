@@ -1,0 +1,31 @@
+"use client";
+
+import styled from "styled-components";
+import { Icon } from "./global/components/icon";
+import { Loader } from "./global/components/loader";
+import ImgReact from "./global/assets/React.png";
+
+import { useRouter } from "next/navigation";
+
+const Container = styled.div`
+  display: grid;
+  height: 100vh;
+  place-content: center;
+`;
+
+export default function Home() {
+  const router = useRouter();
+
+  setTimeout(() => {
+    router.push("/welcome");
+  }, 3000);
+
+  return (
+    <Container>
+      <Loader />
+      <div>
+        <Icon IconImg={ImgReact} />
+      </div>
+    </Container>
+  );
+}
