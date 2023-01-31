@@ -7,7 +7,7 @@ const config = {
     appId: process.env.NEXT_PUBLIC_APP_ID,
   };
 
-export const url = process.env.NEXT_URL_BACK
+export const url = "http://localhost:4000/api/"
   
   export default config;
   

@@ -13,15 +13,20 @@ type PageProps = {};
 const Page = ({}: PageProps) => {
   const router = useRouter();
   const { loginUser } = useUser();
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>("");
+  const [success, setSuccess] = useState(false)
 
   const handleSubmit = async (val: SingUpType) => {
     setLoading(true);
     const { accept_conditions: _, ...newObj } = val;
     const { data, error } = await signUpApi(newObj);
-    console.log(data);
+    if(error == null) setSuccess(true)
+
+    
     setError(error);
+
     setLoading(false);
     /* 
             loginUser(data);
@@ -39,7 +44,7 @@ const Page = ({}: PageProps) => {
 
       {error && <p className="error">{error}</p>}
 
-      {error == null && <p>Proceso exitoso</p>}
+      {success && <p className="success">Proceso exitoso</p>}
 
       <p className="or">Or continue with</p>
 
