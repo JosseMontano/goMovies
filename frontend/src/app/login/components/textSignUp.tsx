@@ -1,3 +1,5 @@
+"use client";
+
 import styled from "styled-components";
 
 type TextSignUpProps = {
@@ -17,6 +19,6 @@ export const TextSignUp = ({
   redirecToCreateAccount,
 }: TextSignUpProps) => (
   <StyledSignUp colorPrimary={colorPrimary}>
-    Don't have an account? <span onClick={redirecToCreateAccount}>sign up</span>
+   {" Don't have an account? "} <span onClick={redirecToCreateAccount}>{"sign up"}</span>
   </StyledSignUp>
 );

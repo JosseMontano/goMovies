@@ -15,6 +15,11 @@ import { auth } from "../firebase";
 import { useRouter } from "next/navigation";
 import { ButtonRedSocial } from "./components/buttonRedSocial";
 import { useUser } from "../global/store/user";
+import { Or } from "./components/or";
+import { Btn } from "../global/components/btn";
+import { TextSignUp } from "./components/textSignUp";
+import { colorPrimary } from "../global/styles/colors";
+import Link from "next/link";
 
 type PageProps = {};
 
@@ -28,27 +33,8 @@ const Containter = styled.div`
 const Page = ({}: PageProps) => {
   const router = useRouter();
 
-
   const {loginUser} = useUser()
 
-  function validateFormWithJS(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const nameQuery = (document.querySelector("#name") as HTMLInputElement)
-      .value;
-    const rollNumber = (
-      document.querySelector("#rollNumber") as HTMLInputElement
-    ).value;
-
-    if (!nameQuery) {
-      alert("Please enter your name.");
-      return false;
-    }
-
-    if (rollNumber.length < 3) {
-      alert("Roll Number should be at least 3 digits long.");
-      return false;
-    }
-  }
 
   const loginGoogle = async () => {
     const provider = new GoogleAuthProvider();
@@ -75,17 +61,14 @@ const Page = ({}: PageProps) => {
     loginFacebook,
   });
 
+  const redirecToCreateAccount = () => {
+    router.push("/signUp");
+  };
+
+
   return (
     <Containter>
-      {/*       <form onSubmit={validateFormWithJS}>
-        <label>Roll Number:</label>
-        <input type="text" name="rollNumber" id="rollNumber" />
 
-        <label>Name:</label>
-        <input type="text" name="name" id="name" />
-
-        <button type="submit">Submit</button>
-      </form> */}
       <Img IconIMG={IconIMG} />
       <Title />
 
@@ -93,6 +76,14 @@ const Page = ({}: PageProps) => {
         buttonRedSocialJSX.map((v, i) => (
             <ButtonRedSocial key={i} img={v.img} msg={v.msg} singIn={v.singIn} />
         ))}
+         <Or />
+      <Link href={"sign-in"}>
+        <Btn colorPrimary={colorPrimary} msg={"Sign in with password"} />
+      </Link>
+      <TextSignUp
+        redirecToCreateAccount={redirecToCreateAccount}
+        colorPrimary={colorPrimary}
+      />
     </Containter>
   );
 };
