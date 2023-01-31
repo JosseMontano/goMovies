@@ -1,5 +1,3 @@
-import { IconType } from "react-icons";
-
 export default interface CustomFormType {
   type: string;
   name: string;
