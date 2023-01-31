@@ -1,5 +1,5 @@
 import Image from "next/image";
-import IconImg from "../../assets/React.png";
+import IconImg from "@/assets/react.png";
 
 type IconProps = {};
 

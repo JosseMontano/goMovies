@@ -17,7 +17,7 @@ type mapType = {
   [key: string]: JSX.Element;
 };
 
-export const IndexForm = ({ handleSubmit, isLoading }: ComponentFormProps) => {
+const IndexForm = ({ handleSubmit, isLoading }: ComponentFormProps) => {
   const msg = isLoading ? "Loading..." : "Sign up";
 
   function showContent(v: CustomFormType) {
@@ -43,3 +43,5 @@ export const IndexForm = ({ handleSubmit, isLoading }: ComponentFormProps) => {
     </Formik>
   );
 };
+
+export default IndexForm

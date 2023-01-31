@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Icon, Title, BtnSocialMedia } from "@/components/loginRegister";
 import { Footer } from "./components/footer";
 import SingUpType from "./interfaces/signUp";
-import { IndexForm } from "./components/form";
+import IndexForm  from "./components/form";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/store/user";
 import { signUpApi } from "./services/auth";

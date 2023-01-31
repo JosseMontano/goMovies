@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import IconImg from "@/global/assets/React.png";
+import IconImg from "@/global/assets/react.png";
 type IconProps = {
 
 };

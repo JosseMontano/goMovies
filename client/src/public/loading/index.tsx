@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Img from "@/global/assets/React.png";
+import Img from "@/global/assets/react.png";
 import { Icon } from "./components/icon";
 import { Loader } from "./components/loader";
 import { useNavigate } from "react-router-dom";
