@@ -1,4 +1,4 @@
-import { requiredText } from "@/app/global/utilities/fieldRequired";
+import { requiredText } from "@/utilities/fieldRequired";
 import * as Yup from "yup";
 import SingUpType from "../interfaces/signUp";
 

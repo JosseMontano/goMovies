@@ -37,12 +37,14 @@ const Page = ({}: PageProps) => {
   const router = useRouter();
   const { loginUser } = useUser();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (val: SingUpType) => {
     setLoading(true);
     const { accept_conditions: _, ...newObj } = val;
-    const res = await signUpApi(newObj);
-    console.log(res);
+    const { data, error } = await signUpApi(newObj);
+    console.log(data);
+    setError(error);
     setLoading(false);
     /* 
             loginUser(data);
@@ -58,6 +60,10 @@ const Page = ({}: PageProps) => {
 
       <IndexForm handleSubmit={handleSubmit} isLoading={loading} />
 
+      {error && <p className="error">{error}</p>}
+
+      {error == null && <p>Proceso exitoso</p>}
+
       <StyledOr>Or continue with</StyledOr>
 
       <BtnSocialMedia />
@@ -68,7 +74,3 @@ const Page = ({}: PageProps) => {
 };
 
 export default Page;
-
-{
-  /*      {isError && <p className="error">{msgError}</p>}   */
-}

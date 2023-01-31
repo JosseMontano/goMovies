@@ -14,11 +14,11 @@ import {
 import { auth } from "../firebase";
 import { useRouter } from "next/navigation";
 import { ButtonRedSocial } from "./components/buttonRedSocial";
-import { useUser } from "../global/store/user";
+import { useUser } from "@/store/user";
 import { Or } from "./components/or";
-import { Btn } from "../global/components/btn";
+import { Btn } from "@/components/btn";
 import { TextSignUp } from "./components/textSignUp";
-import { colorPrimary } from "../global/styles/colors";
+import { colorPrimary } from "@/styles/colors";
 import Link from "next/link";
 
 type PageProps = {};

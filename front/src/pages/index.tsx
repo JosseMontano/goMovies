@@ -1,10 +1,8 @@
-"use client";
-
+import { useRouter } from "next/router";
 import styled from "styled-components";
 import { Icon } from "./index/components/icon";
 import { Loader } from "./index/components/loader";
-import ImgReact from "@/app/global/assets/React.png";
-import { useRouter } from "next/navigation";
+import ImgReact from "@/assets/react.png";
 
 const Container = styled.div`
   display: grid;
@@ -18,7 +16,6 @@ export default function Home() {
   setTimeout(() => {
     router.push("/welcome");
   }, 3000);
-
   return (
     <Container>
       <Loader />
