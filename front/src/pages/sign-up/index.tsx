@@ -19,11 +19,13 @@ const Page = ({}: PageProps) => {
   const [success, setSuccess] = useState(false)
 
   const handleSubmit = async (val: SingUpType) => {
+    setSuccess(false)
     setLoading(true);
     const { accept_conditions: _, ...newObj } = val;
-    const { data, error } = await signUpApi(newObj);
-    if(error == null) setSuccess(true)
-
+    const { data, error } = await signUpApi<SingUpType>(newObj);
+    console.log(data)
+    if(error == "") setSuccess(true)
+    
     
     setError(error);
 
