@@ -1,9 +1,9 @@
 import { url } from "@/pages/config";
 
-export const fetchPost = async <T>(
+export const fetchPost = async <T, S>(
   body: T,
   path: string
-): Promise<{ data: T[]; error: string }> => {
+): Promise<{ data: S | null; error: string }> => {
   let error = "";
 
   const response = await fetch(`${url + path}`, {
@@ -16,20 +16,19 @@ export const fetchPost = async <T>(
       ...body,
     }),
   });
+  const result = await response.json();
 
   if (response.ok) {
-    const result = await response.json();
     return {
       data: result,
       error: "",
     };
   }
 
-  const resError = await response.json();
-  error = resError.Message;
+  error = result.Message;
 
   return {
-    data: [],
+    data:null,
     error: error,
   };
 };
