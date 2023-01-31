@@ -6,6 +6,7 @@ import { IndexForm } from "./components/form";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/store/user";
 import { signUpApi } from "./services/auth";
+import { UseFetchPost } from "@/hooks/useFetchPost";
 import UserType from "@/interfaces/user";
 
 type PageProps = {};
@@ -14,26 +15,17 @@ const Page = ({}: PageProps) => {
   const router = useRouter();
   const { loginUser } = useUser();
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>("");
-  const [success, setSuccess] = useState(false)
+  const useFecth = UseFetchPost<SingUpType | null, UserType>(signUpApi);
+  const { error, post, loading, success } = useFecth;
 
   const handleSubmit = async (val: SingUpType) => {
-    setSuccess(false)
-    setLoading(true);
     const { accept_conditions: _, ...newObj } = val;
-    const { data, error } = await signUpApi<SingUpType>(newObj);
-    console.log(data)
-    if(error == "") setSuccess(true)
-    
-    
-    setError(error);
 
-    setLoading(false);
-    /* 
-            loginUser(data);
-        push("/home");
-    */
+    const data = await post(newObj);
+    if (data) {
+      loginUser(data);
+    }
+    /*     push("/home"); */
   };
 
   return (
