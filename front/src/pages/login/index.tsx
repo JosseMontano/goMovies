@@ -1,7 +1,4 @@
-"use client";
-
 import React from "react";
-import styled from "styled-components";
 import { Img } from "./components/img";
 import IconIMG from "./assets/IconGo.png";
 import { Title } from "./components/title";
@@ -22,13 +19,6 @@ import { colorPrimary } from "@/styles/colors";
 import Link from "next/link";
 
 type PageProps = {};
-
-const Containter = styled.div`
-  display: grid;
-  height: 100vh;
-  place-content: center;
-  text-align: center;
-`;
 
 const Page = ({}: PageProps) => {
   const router = useRouter();
@@ -61,7 +51,7 @@ const Page = ({}: PageProps) => {
   });
 
   return (
-    <Containter>
+    <div className="container">
       <Img IconIMG={IconIMG} />
       <Title />
 
@@ -74,7 +64,17 @@ const Page = ({}: PageProps) => {
         <Btn colorPrimary={colorPrimary} msg={"Sign in with password"} />
       </Link>
       <TextSignUp colorPrimary={colorPrimary} />
-    </Containter>
+      <style jsx>
+        {`
+          .container {
+            display: grid;
+            height: 100vh;
+            place-content: center;
+            text-align: center;
+          }
+        `}
+      </style>
+    </div>
   );
 };
 
